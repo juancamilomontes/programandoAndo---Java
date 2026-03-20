@@ -1,9 +1,9 @@
-package CrudRestaurante;
+package CrudNotasBlock;
 
 import javax.swing.JOptionPane;
 import java.sql.*;
 
-public class MenuRestaurante {
+public class MenuNotas {
 
     static String URL = "jdbc:sqlite:mibasededatos.db";
 

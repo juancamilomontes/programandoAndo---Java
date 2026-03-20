@@ -5,7 +5,7 @@ import databaseConexion.InicializarDb;
 
 import javax.swing.*;
 
-import CrudRestaurante.MenuRestaurante;
+import CrudNotasBlock.MenuNotas;
 
 import java.sql.SQLOutput;
 import java.util.Scanner;
@@ -36,8 +36,8 @@ public class Main {
         }
         if (opcion == 3) {
             System.out.println("3.Ingresando a Ejercicios Con POO con Conexion a Base De Datos");
-            MenuRestaurante menuRestaurante = new MenuRestaurante();
-             menuRestaurante.iniciar();
+            MenuNotas menuNotas = new MenuNotas();
+             menuNotas.iniciar();
 
         }
 
