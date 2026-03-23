@@ -1,11 +1,14 @@
 package CrudNotasBlock;
 
 import javax.swing.JOptionPane;
+
+import databaseConexion.ConexionDb;
+
 import java.sql.*;
 
 public class MenuNotas {
 
-    static String URL = "jdbc:sqlite:mibasededatos.db";
+    static String URL = "jdbc:sqlite:database.db";
 
     // CONEXION
     static Connection conectar() throws SQLException {
@@ -28,28 +31,30 @@ public class MenuNotas {
     }
 
     // CREATE - Agregar producto
-    static void agregar() {
-        String nombre   = JOptionPane.showInputDialog("Nombre del producto:");
-        String precio   = JOptionPane.showInputDialog("Precio:");
-        String cantidad = JOptionPane.showInputDialog("Cantidad:");
+   static void agregar() {
+    String titulo = JOptionPane.showInputDialog("Título de la nota:");
+    String contenido = JOptionPane.showInputDialog("Contenido de la nota:");
 
-        String sql = "INSERT INTO productos (nombre, precio, cantidad) VALUES (?, ?, ?)";
-        try (Connection conn = conectar();
-             PreparedStatement ps = conn.prepareStatement(sql)) {
-            ps.setString(1, nombre);
-            ps.setDouble(2, Double.parseDouble(precio));
-            ps.setInt(3, Integer.parseInt(cantidad));
-            ps.executeUpdate();
-            JOptionPane.showMessageDialog(null, "Producto agregado!");
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
-        }
+    String sql = "INSERT INTO notas (titulo, contenido) VALUES (?, ?)"; 
+    
+    // Usamos ConexionDb.getConexion() que es la que ya tienes configurada
+    try (Connection conn = ConexionDb.getConexion(); 
+         PreparedStatement ps = conn.prepareStatement(sql)) {
+        
+        ps.setString(1, titulo);
+        ps.setString(2, contenido);
+        
+        ps.executeUpdate();
+        JOptionPane.showMessageDialog(null, "¡Nota guardada con éxito!");
+        
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error: " + e.getMessage());
     }
-
+}
     // READ - Ver todos los productos
     static void verTodos() {
-        String sql = "SELECT * FROM productos";
-        String resultado = "PRODUCTOS REGISTRADOS:\n\n";
+        String sql = "SELECT * FROM notas";
+        String resultado = "NOTAS REGISTRADAS:\n\n";
         try (Connection conn = conectar();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
