@@ -141,13 +141,13 @@ public class BuclesCiclos {
             System.out.println("14. Encontrar el número mayor dentro de un arreglo usando un ciclo for.");
             System.out.println("Ingreso al Ejercicio 14");
             int[] Vector = { 1, 2, 3, 4 };
-            int Mayor = 0;
-            for (int i = 0; i <= Vector.length; i++) {
+            int Mayor = Vector[0];
+            for (int i = 1; i < Vector.length; i++) {
                 if (Vector[i] > Mayor) {
                     Mayor = Vector[i];
                 }
             }
-
+            System.out.println("Mayor encontrado: " + Mayor);
         }
 
         if (Ejercicio == 15) {
@@ -181,26 +181,17 @@ public class BuclesCiclos {
         if (Ejercicio == 1) {
             System.out.println("1. Imprimir los números del 1 al 50 usando un ciclo for.");
             System.out.println("Ingreso al Ejercicio 1");
-
-        }
-        if (Ejercicio == 1) {
-            System.out.println("1. Imprimir los números del 1 al 50 usando un ciclo for.");
-            System.out.println("Ingreso al Ejercicio 1");
-
-        }
-        if (Ejercicio == 1) {
-            System.out.println("1. Imprimir los números del 1 al 50 usando un ciclo for.");
-            System.out.println("Ingreso al Ejercicio 1");
-
+            for (int i = 1; i <= 50; i++) {
+                System.out.println(i);
+            }
         }
         if (Ejercicio == 17) {
             System.out.println("17. Imprimir un triángulo de asteriscos de altura 5 usando ciclos for anidados.");
             System.out.println("Ingreso al Ejercicio 17");
             System.out.println("Imprimiendo Triangulo");
-            String[] vector = { "*", "*", "*", "*", "*" };
-            for (int j = 1; j <= vector.length; j++) {
-                for (int z = 1; z <= j; z++) {
-                    System.out.print(vector[j]);
+            for (int fila = 1; fila <= 5; fila++) {
+                for (int col = 1; col <= fila; col++) {
+                    System.out.print("*");
                 }
                 System.out.println();
             }
@@ -233,7 +224,7 @@ public class BuclesCiclos {
 
             int Tamano = Cadena.length();
             System.out.println("Vamos imprimir la cadena " + Cadena);
-            for (int i = 0; i <= Tamano; i++) {
+            for (int i = 0; i < Tamano; i++) {
                 System.out.println(Cadena.charAt(i));
             }
 
