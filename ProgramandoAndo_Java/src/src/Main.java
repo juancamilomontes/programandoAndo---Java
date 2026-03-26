@@ -1,49 +1,45 @@
 import EjerciciosCiclosBucles.BuclesCiclos;
 import EjerciciosCondicionales.EjerciciosCondicionales;
-import databaseConexion.ConexionDb;
 import databaseConexion.InicializarDb;
-
+import CrudNotasBlock.MenuNotas;
 import javax.swing.*;
 
-import CrudNotasBlock.MenuNotas;
-
-import java.sql.SQLOutput;
-import java.util.Scanner;
-
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
     public static void main(String[] args) {
 
-        String selecion = (JOptionPane.showInputDialog(
+        InicializarDb.crearTablas();
+
+        String seleccion = JOptionPane.showInputDialog(
                 "Bienvenido A Programando Ando\n" +
-                        "Aquí Aprenderemos a Programar Con Java\n\n" +
-                        "Lista De Ejercicios\n" +
-                        "1. Condicionales\n" +
-                        "2. Ciclos y Bucles\n" +
-                        "3. POO con Conexión a Base De Datos\n\n" +
-                        "Ingrese una opción:"));
+                "Aquí Aprenderemos a Programar Con Java\n\n" +
+                "Lista De Ejercicios\n" +
+                "1. Condicionales\n" +
+                "2. Ciclos y Bucles\n" +
+                "3. POO con Conexión a Base De Datos\n\n" +
+                "Ingrese una opción:");
 
-        int opcion = Integer.parseInt(selecion);
+        try {
+            int opcion = Integer.parseInt(seleccion);
 
-        if (opcion == 1) {
-            System.out.println("1.Ingresando a Ejercicios Con Condicionales");
-            EjerciciosCondicionales ejerciciosCondicionales = new EjerciciosCondicionales();
+            if (opcion == 1) {
+                System.out.println("1. Ingresando a Ejercicios Con Condicionales");
+                EjerciciosCondicionales ejerciciosCondicionales = new EjerciciosCondicionales();
+            }
+            else if (opcion == 2) {
+                System.out.println("2. Ingresando a Ejercicios Con Ciclos y Bucles");
+                BuclesCiclos Ciclos = new BuclesCiclos();
+            }
+            else if (opcion == 3) {
+                System.out.println("3. Ingresando a Ejercicios Con POO con Conexion a Base De Datos");
+                MenuNotas menuNotas = new MenuNotas();
+                menuNotas.iniciar();
+            }
+            else {
+                JOptionPane.showMessageDialog(null, "Opción inválida.");
+            }
+
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(null, "Por favor ingresa un número válido.");
         }
-        if (opcion == 2) {
-            System.out.println("2.Ingresando a Ejercicios Con Ciclos y Bucles");
-            BuclesCiclos Ciclos = new BuclesCiclos();
-        }
-        if (opcion == 3) {
-            System.out.println("3.Ingresando a Ejercicios Con POO con Conexion a Base De Datos");
-            MenuNotas menuNotas = new MenuNotas();
-             menuNotas.iniciar();
-
-        }
-
-        if (opcion < 0 || opcion >3) {
-            System.out.println("Ingreso una Opcion Invalidad");
-        }
-
     }
 }

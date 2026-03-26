@@ -7,9 +7,14 @@ import java.sql.*;
 public class MenuNotas {
 
     // 1. CREATE - Agregar nota
-    static void agregar() {
+    void agregar() {
         String titulo = JOptionPane.showInputDialog("Título de la nota:");
         String contenido = JOptionPane.showInputDialog("Contenido de la nota:");
+
+        if (titulo == null || titulo.isBlank() || contenido == null || contenido.isBlank()) {
+    JOptionPane.showMessageDialog(null, "El título y contenido no pueden estar vacíos.");
+    return;
+}
 
         String sql = "INSERT INTO notas (titulo, contenido) VALUES (?, ?)"; 
         
@@ -27,7 +32,7 @@ public class MenuNotas {
     }
 
     // 2. READ - Ver todas las notas
-    static void verTodos() {
+    void verTodos() {
         String sql = "SELECT * FROM notas";
         StringBuilder resultado = new StringBuilder("MIS NOTAS:\n\n");
         
@@ -49,10 +54,15 @@ public class MenuNotas {
     }
 
     // 3. UPDATE - Actualizar nota
-    static void actualizar() {
+    void actualizar() {
         String id = JOptionPane.showInputDialog("ID de la nota a editar:");
         String nuevoTitulo = JOptionPane.showInputDialog("Nuevo título:");
         String nuevoContenido = JOptionPane.showInputDialog("Nuevo contenido:");
+
+        if (id == null || nuevoTitulo == null || nuevoContenido == null) {
+    JOptionPane.showMessageDialog(null, "Operación cancelada.");
+    return;
+}
 
         String sql = "UPDATE notas SET titulo=?, contenido=? WHERE id=?";
         
@@ -73,8 +83,12 @@ public class MenuNotas {
     }
 
     // 4. DELETE - Eliminar nota
-    static void eliminar() {
+    void eliminar() {
         String id = JOptionPane.showInputDialog("ID de la nota a borrar:");
+        if (id == null || id.isBlank()) {
+    JOptionPane.showMessageDialog(null, "Operación cancelada.");
+    return;
+}
         String sql = "DELETE FROM notas WHERE id=?";
         
         try (Connection conn = ConexionDb.getConexion();
@@ -92,8 +106,7 @@ public class MenuNotas {
     }
 
     // MENU PRINCIPAL
-    public void iniciar() {
-        databaseConexion.InicializarDb.crearTablas(); 
+    public void iniciar() { 
         String opcion = "";
 
         while (opcion != null && !opcion.equals("5")) {
